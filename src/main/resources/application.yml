@@ -7,7 +7,7 @@ logging:
     org.springframework.web: TRACE
     org.springframework.security: DEBUG
     org.springframework.security.oauth2: DEBUG
-    org.springframework.cloud.gateway: TRACE
+    org.springframework.gateway: TRACE
 #    org.springframework.boot.autoconfigure: DEBUG
 
 
@@ -17,23 +17,23 @@ spring:
     exclude: org.springframework.boot.actuate.autoconfigure.security.reactive.ReactiveManagementWebSecurityAutoConfiguration
   thymeleaf:
     cache: false
-  security:
-    oauth2:
-      client:
-        registration:
-          login-client:
-            provider: uaa
-            client-id: acme
-            client-secret: acmesecret
-            authorization-grant-type: authorization_code
-            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope: user
-        provider:
-          uaa:
-            authorization-uri: http://10.104.204.130:9191/uaa/oauth/authorize
-            token-uri: http://10.104.204.130:9191/uaa/oauth/token
-            user-info-uri: http://10.104.204.130:9191/uaa/user
-            user-name-attribute: name
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          login-client:
+#            provider: uaa
+#            client-id: acme
+#            client-secret: acmesecret
+#            authorization-grant-type: authorization_code
+#            redirect-uri-template: "{baseUrl}/login/oauth2/code/{registrationId}"
+#            scope: user
+#        provider:
+#          uaa:
+#            authorization-uri: http://10.104.204.130:9191/uaa/oauth/authorize
+#            token-uri: http://10.104.204.130:9191/uaa/oauth/token
+#            user-info-uri: http://10.104.204.130:9191/uaa/user
+#            user-name-attribute: name
   cloud:
     gateway:
       discovery:
