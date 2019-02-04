@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: gateway
+#  cloud:
+#    kubernetes:
+#      config:
+#        namespace: default
+#        sources:
+#        - name: global
+#        - name: gateway
