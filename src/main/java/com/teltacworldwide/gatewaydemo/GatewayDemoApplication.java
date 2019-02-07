@@ -1,6 +1,7 @@
 package com.teltacworldwide.gatewaydemo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.cloud.security.oauth2.gateway.TokenRelayGatewayFilterFactory;
@@ -8,16 +9,32 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 //import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 //import org.springframework.security.oauth2.client.annotation.RegisteredOAuth2AuthorizedClient;
 //import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @SpringBootApplication
-@Controller
 public class GatewayDemoApplication {
 
 //    @Autowired
 //    private TokenRelayGatewayFilterFactory filterFactory;
+
+
+    @Bean
+    CommandLineRunner discoveryClientRunner(DiscoveryClient client) {
+        return new CommandLineRunner() {
+            @Override
+            public void run(String... args) throws Exception {
+                System.out.println("Available Services:");
+                client.getServices().forEach( System.out::println);
+            }
+        };
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(GatewayDemoApplication.class, args);
@@ -27,8 +44,8 @@ public class GatewayDemoApplication {
 //    public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
 //        return builder.routes()
 //                .route("common", r -> r.path("/common/**")
-//                        .filters(f -> f.stripPrefix(1).filter(filterFactory.apply()))
-//                        .uri("http://10.100.135.181:8083"))
+//                        .filters(f -> f.stripPrefix(1))
+//                        .uri("lb://common"))
 //                .build();
 //    }
 
