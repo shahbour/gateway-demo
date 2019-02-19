@@ -8,11 +8,11 @@ server:
 
 logging:
   level:
-    root: INFO
-    org.springframework.web: INFO
-    org.springframework.security: INFO
-    org.springframework.security.oauth2: INFO
-    org.springframework.gateway: INFO
+    root: DEBUG
+#    org.springframework.web: INFO
+#    org.springframework.security: INFO
+#    org.springframework.security.oauth2: INFO
+    org.springframework.gateway: TRACE
 #    org.springframework.boot.autoconfigure: DEBUG
 
 
@@ -52,7 +52,8 @@ spring:
                 replacement: "'/${remaining}'"
             - name: TokenRelay
 #          url-expression: "'http://'+serviceId + ':' + port"
-          url-expression: "'http://' + host + ':' + port"
+#          url-expression: "'http://' + host + ':' + port"
+#          url-expression: "'http://' + serviceId"
 management:
   endpoint:
     gateway:
